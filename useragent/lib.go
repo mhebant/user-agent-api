@@ -23,7 +23,7 @@ func (repo *Repository) Query(ua string) *Info {
 			} 
 		} 
 	}
-	return nil
+	return &Info{}
 }
 
 func RepositoryFromFile(file string) (Repository, error) {
