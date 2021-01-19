@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	var repo *useragent.Repository
+	var repo useragent.Repository
 	var err error
 	repo, err = useragent.RepositoryFromFile("user-agents.json")
 	b, _ := json.Marshal(repo)
