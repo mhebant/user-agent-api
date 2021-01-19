@@ -6,24 +6,21 @@ import (
 )
 
 type Info struct {
-	app *string
-	device *string
-	bot *bool
+	User_Agents []string
+	App *string
+	Device *string
+	Bot *bool
 }
 
-type Repository interface {
-	Query(ua string) *Info
+type Repository struct {
+	UserAgents []Info
 }
 
-type JsonRepository struct {
-	useragents []map[string]interface{}
-}
-
-func (*JsonRepository) Query(ua string) *Info {
+func (*Repository) Query(ua string) *Info {
 	return nil
 }
 
-func RepositoryFromFile(file string) (*JsonRepository, error) {
+func RepositoryFromFile(file string) (*Repository, error) {
 	var data []byte
 	var err error
 
@@ -32,8 +29,8 @@ func RepositoryFromFile(file string) (*JsonRepository, error) {
 		return nil, err
 	}
 	
-	var repo JsonRepository
-	err = json.Unmarshal(data, &repo.useragents)
+	var repo Repository
+	err = json.Unmarshal(data, &repo.UserAgents)
 	if err != nil {
 		return nil, err
 	}
