@@ -14,10 +14,11 @@ type Info struct {
 }
 
 func (info *Info) ToJson() string {
-	m := make(map[string]interface{})
-	m["app"] = info.App
-	m["device"] = info.Device
-	m["bot"] = info.Bot
+	m := map[string]interface{}{
+		"app": info.App,
+		"device": info.Device,
+		"bot": info.Bot,
+	}
 	b, _ := json.Marshal(m)
 	return string(b)
 }
