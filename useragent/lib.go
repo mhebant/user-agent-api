@@ -13,6 +13,15 @@ type Info struct {
 	Bot bool
 }
 
+func (info *Info) ToJson() string {
+	m := make(map[string]interface{})
+	m["app"] = info.App
+	m["device"] = info.Device
+	m["bot"] = info.Bot
+	b, _ := json.Marshal(m)
+	return string(b)
+}
+
 type Repository []Info
 
 func (repo *Repository) Query(ua string) *Info {

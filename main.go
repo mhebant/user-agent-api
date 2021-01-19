@@ -25,7 +25,7 @@ func main() {
 
 		uaInfo := repo.Query(ua)
 		resp.WriteHeader(http.StatusOK)
-		fmt.Fprint(resp, uaInfo)
+		fmt.Fprint(resp, uaInfo.ToJson())
 	})
 	http.ListenAndServe(":8080", nil)
 }
