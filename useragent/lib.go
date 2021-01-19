@@ -3,18 +3,26 @@ package useragent
 import (
 	"io/ioutil"
 	"encoding/json"
+	"regexp"
 )
 
 type Info struct {
 	User_Agents []string
-	App *string
-	Device *string
-	Bot *bool
+	App string
+	Device string
+	Bot bool
 }
 
 type Repository []Info
 
-func (*Repository) Query(ua string) *Info {
+func (repo *Repository) Query(ua string) *Info {
+	for _, info := range *repo {
+		for _, re := range info.User_Agents {
+			if match, err := regexp.MatchString(re, ua); err==nil && match {
+				return &info
+			} 
+		} 
+	}
 	return nil
 }
 
